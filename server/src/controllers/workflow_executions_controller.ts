@@ -38,18 +38,17 @@ export class WorkflowExecutionsController {
 
     let ability = null;
 
-    if (createWorkflowExecutionDto.app) {
-      ability = await this.appsAbilityFactory.appsActions(user, createWorkflowExecutionDto.app);
-    } else {
+    if (createWorkflowExecutionDto.executeUsing !== 'app') {
       ability = await this.appsAbilityFactory.appsActions(user, app.id);
-    }
-
-    if (!ability.can('viewApp', app)) {
-      throw new ForbiddenException(
-        JSON.stringify({
-          organizationId: app.organizationId,
-        })
-      );
+      if (!ability.can('viewApp', app)) {
+        throw new ForbiddenException(
+          JSON.stringify({
+            organizationId: app.organizationId,
+          })
+        );
+      }
+    } else {
+      ability = await this.appsAbilityFactory.appsActions(user, createWorkflowExecutionDto.app);
     }
 
     const workflowExecution = await this.workflowExecutionsService.create(createWorkflowExecutionDto);
