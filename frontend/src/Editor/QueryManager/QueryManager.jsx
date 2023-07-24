@@ -110,6 +110,7 @@ const QueryManager = ({
         createDraftQuery={createDraftQuery}
         setOptions={setOptions}
         ref={previewPanelRef}
+        appId={appId}
       />
     </div>
   );

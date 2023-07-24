@@ -219,6 +219,20 @@ export class AppsController {
     return decamelizeKeys(response);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get(':id/workflows')
+  async fetchWorkflows(@User() user, @Param('id') id) {
+    const ability = await this.appsAbilityFactory.appsActions(user);
+
+    if (!ability.can('updateVersions', App)) {
+      throw new ForbiddenException('You do not have permissions to perform this action');
+    }
+
+    const result = await this.appsService.getWorkflows();
+
+    return decamelizeKeys({ workflows: result });
+  }
+
   // deprecated
   @UseGuards(JwtAuthGuard)
   @Get(':id/users')

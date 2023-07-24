@@ -36,7 +36,14 @@ export class WorkflowExecutionsController {
         : undefined;
     const app = appVersion ? appVersion.app : await this.appsRepository.findOne(createWorkflowExecutionDto.appId);
 
-    const ability = await this.appsAbilityFactory.appsActions(user, app.id);
+    let ability = null;
+
+    if (createWorkflowExecutionDto.app) {
+      ability = await this.appsAbilityFactory.appsActions(user, createWorkflowExecutionDto.app);
+    } else {
+      ability = await this.appsAbilityFactory.appsActions(user, app.id);
+    }
+
     if (!ability.can('viewApp', app)) {
       throw new ForbiddenException(
         JSON.stringify({

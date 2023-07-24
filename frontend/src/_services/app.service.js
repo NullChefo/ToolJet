@@ -22,6 +22,7 @@ export const appService = {
   setPasswordFromToken,
   acceptInvite,
   getVersions,
+  getWorkflows,
 };
 
 function getConfig() {
@@ -37,6 +38,11 @@ function getAll(page, folder, searchKey, type = 'front-end') {
       `${config.apiUrl}/apps?page=${page}&folder=${folder || ''}&searchKey=${searchKey}&type=${type}`,
       requestOptions
     ).then(handleResponse);
+}
+
+function getWorkflows(id) {
+  const requestOptions = { method: 'GET', headers: authHeader(), credentials: 'include' };
+  return fetch(`${config.apiUrl}/apps/${id}/workflows`, requestOptions).then(handleResponse);
 }
 
 function createApp(body = {}) {

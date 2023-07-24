@@ -43,6 +43,7 @@ export const QueryManagerBody = forwardRef(
       appDefinition,
       createDraftQuery,
       setOptions,
+      appId,
     },
     ref
   ) => {
@@ -276,6 +277,7 @@ export const QueryManagerBody = forwardRef(
                 isEditMode={true} // Made TRUE always to avoid setting default options again
                 queryName={queryName}
                 mode={mode}
+                appId={appId}
               />
               {renderTransformation()}
             </div>

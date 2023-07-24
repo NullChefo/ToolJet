@@ -833,7 +833,8 @@ export function previewQuery(_ref, query, calledFromQuery = false, parameters = 
         _ref,
         query.options.workflowId,
         query.options.blocking,
-        query.options?.params
+        query.options?.params,
+        false
       );
     } else {
       queryExecutionPromise = dataqueryService.preview(
@@ -971,7 +972,8 @@ export function runQuery(_ref, queryId, queryName, confirmed = undefined, mode =
         _self,
         query.options.workflowId,
         query.options.blocking,
-        query.options?.params
+        query.options?.params,
+        false
       );
     } else {
       queryExecutionPromise = dataqueryService.run(queryId, options);

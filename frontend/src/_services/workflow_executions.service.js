@@ -34,10 +34,11 @@ function all(appVersionId) {
   return fetch(`${config.apiUrl}/workflow_executions/all/${appVersionId}`, requestOptions).then(handleResponse);
 }
 
-function execute(appId, params) {
+function execute(workflowAppId, params, appId = undefined) {
   const currentSession = authenticationService.currentSessionValue;
   const body = {
-    appId,
+    appId: workflowAppId,
+    app: appId,
     userId: currentSession.current_user?.id,
     executeUsing: 'app',
     params: Object.fromEntries(params.map((param) => [param.key, param.value])),

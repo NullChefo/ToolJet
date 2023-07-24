@@ -203,6 +203,16 @@ export class AppsService {
     return await viewableAppsQb.getMany();
   }
 
+  async getWorkflows() {
+    const workflowApps = await this.appsRepository.find({
+      where: { type: 'workflow' },
+    });
+
+    const result = workflowApps.map((workflowApp) => ({ id: workflowApp.id, name: workflowApp.name }));
+
+    return result;
+  }
+
   async update(appId: string, appUpdateDto: AppUpdateDto, manager?: EntityManager) {
     const currentVersionId = appUpdateDto.current_version_id;
     const isPublic = appUpdateDto.is_public;

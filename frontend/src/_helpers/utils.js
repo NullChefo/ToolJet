@@ -890,8 +890,9 @@ export function isExpectedDataType(data, expectedDataType) {
 }
 
 export const executeWorkflow = async (self, workflowId, _blocking = false, params = {}) => {
+  const appId = self?.state?.appId;
   const resolvedParams = resolveReferences(params, self.state.currentState, {}, {});
-  const executionResponse = await workflowExecutionsService.execute(workflowId, resolvedParams);
+  const executionResponse = await workflowExecutionsService.execute(workflowId, resolvedParams, appId);
   return { data: executionResponse.result };
 };
 export const validateName = (name, nameType, showError = false, allowSpecialChars = true) => {

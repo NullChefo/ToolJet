@@ -23,4 +23,8 @@ export class CreateWorkflowExecutionDto {
   @IsString()
   @IsNotEmpty()
   userId: string;
+
+  @IsString()
+  @IsOptional()
+  app?: string;
 }

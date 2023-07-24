@@ -5,15 +5,15 @@ import { CodeHinter } from '../../CodeBuilder/CodeHinter';
 import './workflows-query.scss';
 import { v4 as uuidv4 } from 'uuid';
 
-export function Workflows({ options, optionsChanged, currentState }) {
+export function Workflows({ options, optionsChanged, currentState, appId }) {
   const [workflowOptions, setWorkflowOptions] = useState([]);
   const [_selectedWorkflowId, setSelectedWorkflowId] = useState(undefined);
   const [params, setParams] = useState([...(options.params ?? [{ key: '', value: '' }])]);
 
   useEffect(() => {
-    appService.getAll(0, 0, '', 'workflow').then((response) => {
+    appService.getWorkflows(appId).then(({ workflows }) => {
       setWorkflowOptions(
-        response.apps.map((workflow) => ({
+        workflows.map((workflow) => ({
           value: workflow.id,
           name: workflow.name,
         }))
