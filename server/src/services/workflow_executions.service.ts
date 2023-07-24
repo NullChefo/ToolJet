@@ -11,7 +11,7 @@ import { EntityManager, Repository } from 'typeorm';
 import { find } from 'lodash';
 import { DataQueriesService } from './data_queries.service';
 import { User } from 'src/entities/user.entity';
-import { getQueryVariables, resolveCode } from 'lib/utils';
+import { getQueryVariables, resolveCode } from '../../lib/utils';
 import { Graph, alg } from '@dagrejs/graphlib';
 import * as moment from 'moment';
 
