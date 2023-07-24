@@ -85,7 +85,7 @@ describe('workflow executions controller', () => {
         .post('/api/workflow_executions')
         .set('tj-workspace-id', user.defaultOrganizationId)
         .set('Cookie', userData['tokenCookie'])
-        .send({ appId: workflow.id, executeUsing: 'app', userId: user.id });
+        .send({ appId: workflow.id, executeUsing: 'frontend', userId: user.id });
 
       expect(response.statusCode).toBe(403);
     });

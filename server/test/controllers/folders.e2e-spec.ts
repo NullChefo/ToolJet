@@ -307,7 +307,7 @@ describe('folders controller', () => {
         .post(`/api/folders`)
         .set('tj-workspace-id', user.defaultOrganizationId)
         .set('Cookie', loggedUser.tokenCookie)
-        .send({ name: 'My folder', type: 'front-end' });
+        .send({ name: 'my folder', type: 'front-end' });
 
       expect(response.statusCode).toBe(201);
 
